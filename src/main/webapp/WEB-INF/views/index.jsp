@@ -6,6 +6,18 @@
 </head>
 <body>
 <h1>RAG</h1>
+
+<section>
+    <%--  search  --%>
+    <form method="post" action="/search">
+        <input name="query" placeholder="유사도 검색">
+        <button>검색</button>
+    </form>
+    <c:if test="${not empty search}">
+        <p>${search}</p>
+    </c:if>
+</section>
+
 <section>
     <%--  document  --%>
     <form method="post" action="/document">

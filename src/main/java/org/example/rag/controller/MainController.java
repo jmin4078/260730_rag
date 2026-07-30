@@ -41,4 +41,13 @@ public class MainController {
         documentService.save(content, category);
         return "redirect:/";
     }
+    @PostMapping("/search")
+    public String search(
+            @RequestParam String query,
+            RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("search",
+                documentService.search(query)
+        );
+        return "redirect:/";
+    }
 }
