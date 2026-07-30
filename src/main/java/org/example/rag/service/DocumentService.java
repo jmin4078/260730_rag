@@ -24,6 +24,7 @@ public class DocumentService {
         // 여기까지는 vector가 임베딩 안 되어 있는데...
         vectorStore.add(List.of(doc)); // 알아서 임베딩
     }
+
     public List<Document> search(String query) {
 //        return vectorStore.similaritySearch(query);
         return vectorStore.similaritySearch(

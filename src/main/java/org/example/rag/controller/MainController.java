@@ -41,6 +41,7 @@ public class MainController {
         documentService.save(content, category);
         return "redirect:/";
     }
+
     @PostMapping("/search")
     public String search(
             @RequestParam String query,
