@@ -3,9 +3,40 @@
 <html>
 <head>
     <title>RAG</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
 </head>
 <body>
 <h1>RAG</h1>
+<section>
+    <%--  chat  --%>
+    <form method="post" action="/chat">
+        <input name="question" placeholder="RAG로 질문">
+        <button>검색</button>
+    </form>
+    <c:if test="${not empty chat}">
+        <p id="rawChat" style="visibility: hidden">${chat}</p>
+        <p id="chat"></p>
+        <script>
+            const raw = document.querySelector('#rawChat');
+            if (raw) {
+                document.querySelector('#chat').innerHTML = marked.parse(raw.textContent);
+            }
+        </script>
+    </c:if>
+</section>
+<section>
+    <%--  ingest  --%>
+    <form method="post" action="/ingest">
+        <select name="chunkSize">
+            <option value="200">200 (작게)</option>
+            <option value="1000">1000 (크게)</option>
+        </select>
+        <button>주입</button>
+    </form>
+    <c:if test="${not empty chunks}">
+        <p>결과 사이즈 : ${chunks}</p>
+    </c:if>
+</section>
 <section>
     <%--  search  --%>
     <form method="post" action="/search">
@@ -34,19 +65,5 @@
         <p>${embed}</p>
     </c:if>
 </section>
-<%--<section>--%>
-<%--    <section id="raw" style="visibility: hidden">--%>
-<%--        - 코딩을 잘하는 방법을 알려드립니다--%>
-<%--        - 실은 저도 잘 모릅니다--%>
-<%--    </section>--%>
-<%--    <p id="result"></p>--%>
-<%--</section>--%>
-<script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
-<script>
-    const raw = document.querySelector('#raw');
-    if (raw) {
-        document.querySelector('#result').innerHTML = marked.parse(raw.textContent);
-    }
-</script>
 </body>
 </html>

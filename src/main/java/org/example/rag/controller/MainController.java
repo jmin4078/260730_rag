@@ -51,4 +51,24 @@ public class MainController {
         );
         return "redirect:/";
     }
+
+    @PostMapping("/ingest")
+    public String ingest(
+            @RequestParam int chunkSize,
+            RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("chunks",
+                documentService.ingest(chunkSize)
+        );
+        return "redirect:/";
+    }
+
+    @PostMapping("/chat")
+    public String chat(
+            @RequestParam String question,
+            RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("chat",
+                documentService.chat(question)
+        );
+        return "redirect:/";
+    }
 }
