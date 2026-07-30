@@ -1,6 +1,7 @@
 package org.example.rag.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.rag.service.DocumentService;
 import org.example.rag.service.EmbeddingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class MainController {
     private final EmbeddingService embeddingService;
+    private final DocumentService documentService;
 
     @GetMapping
     public String index() {
@@ -29,6 +31,14 @@ public class MainController {
         redirectAttributes.addFlashAttribute("embed",
                 Arrays.toString(embeddingService.embed(text))
         );
+        return "redirect:/";
+    }
+
+    @PostMapping("/document")
+    public String document(
+            @RequestParam String content,
+            @RequestParam String category) {
+        documentService.save(content, category);
         return "redirect:/";
     }
 }

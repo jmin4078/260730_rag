@@ -7,14 +7,20 @@
 <body>
 <h1>RAG</h1>
 <section>
-    <%--  embed  --%>
-    <form method="post">
-        <input name="text" placeholder="임베딩할 텍스트(문장) 입력">
+    <%--  document  --%>
+    <form method="post" action="/document">
+        <input name="content" placeholder="Document로 저장할 텍스트의 내용 입력">
+        <input name="category" placeholder="Document로 저장할 텍스트의 카테고리 입력">
         <button>전송</button>
     </form>
-    <c:if test="${not empty embed}">
-        <p>${embed}</p>
-    </c:if>
+</section>
+<section>
+    <%--  document  --%>
+    <form method="post" action="/document">
+        <input name="content" placeholder="Document Content">
+        <input name="category" placeholder="Document Category">
+        <button>전송</button>
+    </form>
 </section>
 <%--<section>--%>
 <%--    <section id="raw" style="visibility: hidden">--%>
@@ -25,9 +31,9 @@
 <%--</section>--%>
 <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
 <script>
-    const raw = document.getElementById('raw');
+    const raw = document.querySelector('#raw');
     if (raw) {
-        document.getElementById('result').innerHTML = marked.parse(raw.textContent);
+        document.querySelector('#result').innerHTML = marked.parse(raw.textContent);
     }
 </script>
 </body>
